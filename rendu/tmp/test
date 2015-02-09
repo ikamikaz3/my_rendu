@@ -1,0 +1,349 @@
+rouge='\e[0;31m'
+vert='\e[0;32m'
+neutre='\e[0;m'
+
+str1="Hello World"
+str2="Foo Bar"
+str3=""
+
+if [ "$1" = "" ]; then
+    echo "Please use script with a function"
+fi
+
+case $1 in
+    
+    ##
+    ## Test Putstr
+    ##
+    
+    "putstr")
+	res1=`./a.out "${str1}"`
+	
+	echo "Output : [$res1]"
+	echo "Expected : [$str1]"
+	
+	if [ "$res1" = "$str1" ]; then
+	    echo -e "${vert}Putstr : OK${neutre}"
+	else
+	    echo -e "${rouge}Putstr : KO${neutre}"
+	fi
+	;;
+    
+    ##
+    ## Test my_revstr
+    ##
+    
+    "revstr")
+	
+	res1=`./a.out "${str1}"`
+	res2=`echo "${str1}" | rev`
+
+	echo "Output : [$res1]"
+	echo "Expected : [$res2]"
+
+	if [ "$res1" = "$res2" ]; then
+	    echo -e "${vert}Revstr : OK${neutre}"
+	else
+	    echo -e "${rouge}Revstr : KO${neutre}"
+	fi
+	;;
+
+    ##
+    ## Test my_strlen
+    ##
+
+    "strlen")
+	res1=`./a.out "${str1}"`
+	res2=${#str1}
+
+	echo "Output : [$res1]"
+	echo "Expected : [$res2]"
+
+	if [ "$res1" = "$res2" ]; then
+	    echo -e "${vert}Strlen : OK${neutre}"
+	else
+	    echo -e "${rouge}Strlen : KO${neutre}"
+	fi
+	;;
+
+    ##
+    ## Test my_strcat
+    ##
+
+    "strcat")
+	res1=`./a.out "${str1}" "${str2}"`
+	res2="$str1$str2"
+
+	echo "Output : [$res1]"
+	echo "Expected : [$res2]"
+
+	if [ "$res1" = "$res2" ]; then
+	    echo -e "${vert}Strcat : OK${neutre}"
+	else
+	    echo -e "${rouge}Strcat : KO${neutre}"
+	fi
+	;;
+
+    ##
+    ## Test my_strncat
+    ##
+
+    "strncat")
+	n=5
+	cutedString=`echo "${str2}" | cut -c1-"$n"`
+	res1=`./a.out "${str1}" "${str2}" "${n}"`
+	res2="$str1$cutedString"
+
+	echo "Output : [$res1]"
+	echo "Expected : [$res2]"
+
+	if [ "$res1" = "$res2" ]; then
+	    echo -e "${vert}Strncat : OK${neutre}"
+	else
+	    echo -e "${rouge}Strncat : KO${neutre}"
+	fi
+	;;
+
+    ##
+    ## Test my_strcmp 1
+    ##
+
+    "strcmp")
+	res1=`./a.out "${str1}" "${str2}"`
+
+	if [ "$str1" = "$str2" ]; then
+	    res2=0
+	else
+	    res2=-1
+	fi
+
+	echo "Output : [$res1]"
+	echo "Expected : [$res2]"
+
+	if [ "$res1" = "$res2" ]; then
+	    echo -e "${vert}Strcmp : OK${neutre}"
+	else
+	    echo -e "${rouge}Strcmp : KO${neutre}"
+	fi
+
+
+	##
+	## Test my_strcmp 2
+	##
+
+	res1=`./a.out "${str1}" "${str1}"`
+
+	if [ "$str1" = "$str1" ]; then
+	    res2=0
+	else
+	    res2=-1
+	fi
+
+	echo "Output : [$res1]"
+	echo "Expected : [$res2]"
+
+	if [ "$res1" = "$res2" ]; then
+	    echo -e "${vert}Strcmp : OK${neutre}"
+	else
+	    echo -e "${rouge}Strcmp : KO${neutre}"
+	fi
+	;;
+
+    ##
+    ## Test my_strncmp 1
+    ##
+    
+    "strncmp")	
+	str2="Hello Bar"
+	n=5
+	cutedString1=`echo "${str1}" | cut -c1-"$n"`
+	cutedString2=`echo "${str2}" | cut -c1-"$n"`
+	res1=`./a.out "${str1}" "${str2}" n`
+
+	if [ "$cutedString1" = "$cutedString2" ]; then
+	    res2=0
+	else
+	    res2=-1
+	fi
+
+	echo "Output : [$res1]"
+	echo "Expected : [$res2]"
+
+	if [ "$cutedString1" = "$cutedString2" ]; then
+	    echo -e "${vert}Strncmp : OK${neutre}"
+	else
+	    echo -e "${rouge}Strncmp : KO${neutre}"
+	fi
+	
+	##
+	## Test my_strncmp 2
+	##
+	
+	n=7
+	cutedString1=`echo "${str1}" | cut -c1-"$n"`
+	cutedString2=`echo "${str2}" | cut -c1-"$n"`
+	res1=`./a.out "${str1}" "${str2}" n`
+
+	if [ "$cutedString1" = "$cutedString2" ]; then
+	    res2=0
+	else
+	    res2=-1
+	fi
+
+	echo "Output : [$res1]"
+	echo "Expected : [$res2]"
+
+	if [ "$cutedString1" = "$cutedString2" ]; then
+	    echo -e "${vert}Strncmp : OK${neutre}"
+	else
+	    echo -e "${rouge}Strncmp : KO${neutre}"
+	fi
+	;;
+
+    ##
+    ## Test my_strdup
+    ##
+
+    "strdup")
+	res1=`./a.out "${str1}"`
+	res2="$str1"
+
+	echo "Output : [$res1]"
+	echo "Expected : [$res2]"
+
+	if [ "$res1" = "$res2" ]; then
+	    echo -e "${vert}Strdup : OK${neutre}"
+	else
+	    echo -e "${rouge}Strdup : KO${neutre}"
+	fi
+	;;
+    
+    ##
+    ## Test my_putnbr
+    ##
+
+    "putnbr")
+	nb1=-789456
+	nb2=872215
+	nb3=0
+
+	res1=`./a.out "${nb1}"`
+	res2="$nb1"
+
+	echo "Output : [$res1]"
+	echo "Expected : [$res2]"
+
+	if [ "$res1" = "$res2" ]; then
+	    echo -e "${vert}putnbr : OK${neutre}"
+	else
+	    echo -e "${rouge}putnbr : KO${neutre}"
+	fi
+
+	res1=`./a.out "${nb2}"`
+	res2="$nb2"
+
+	echo "Output : [$res1]"
+	echo "Expected : [$res2]"
+
+	if [ "$res1" = "$res2" ]; then
+	    echo -e "${vert}putnbr : OK${neutre}"
+	else
+	    echo -e "${rouge}putnbr : KO${neutre}"
+	fi
+
+	res1=`./a.out "${nb3}"`
+	res2="$nb3"
+
+	echo "Output : [$res1]"
+	echo "Expected : [$res2]"
+
+	if [ "$res1" = "$res2" ]; then
+	    echo -e "${vert}putnbr : OK${neutre}"
+	else
+	    echo -e "${rouge}putnbr : KO${neutre}"
+	fi
+	;;
+
+    ##
+    ## Test my_getnbr
+    ##
+
+    "getnbr")
+	nb1=-789456
+	nb2=872215
+	nb3=0
+
+	res1=`./a.out "${nb1}"`
+	res2="$nb1"
+
+	echo "Output : [$res1]"
+	echo "Expected : [$res2]"
+
+	if [ "$res1" = "$res2" ]; then
+	    echo -e "${vert}getnbr : OK${neutre}"
+	else
+	    echo -e "${rouge}getnbr : KO${neutre}"
+	fi
+
+	res1=`./a.out "${nb2}"`
+	res2="$nb2"
+
+	echo "Output : [$res1]"
+	echo "Expected : [$res2]"
+
+	if [ "$res1" = "$res2" ]; then
+	    echo -e "${vert}getnbr : OK${neutre}"
+	else
+	    echo -e "${rouge}getnbr : KO${neutre}"
+	fi
+
+	res1=`./a.out "${nb3}"`
+	res2="$nb3"
+
+	echo "Output : [$res1]"
+	echo "Expected : [$res2]"
+
+	if [ "$res1" = "$res2" ]; then
+	    echo -e "${vert}getnbr : OK${neutre}"
+	else
+	    echo -e "${rouge}getnbr : KO${neutre}"
+	fi
+	;;
+
+    ##
+    ## my_aff_alpha
+    ##
+
+    "affalpha")
+	res1=`./a.out`
+	res2="abcdefghijklmnopqrstuvwxyz"
+	
+	echo "Output : [$res1]"
+	echo "Expected : [$res2]"
+	
+	if [ "$res1" = "$res2" ]; then
+	    echo -e "${vert}aff_alpha : OK${neutre}"
+	else
+	    echo -e "${rouge}aff_alpha : KO${neutre}"
+	fi
+	;;
+
+    ##
+    ## rotone
+    ##
+
+    "rotone")
+	res1=`./a.out "${str1}"`
+	res2="Ifmmp Xpsme"
+	
+	echo "Output : [$res1]"
+	echo "Expected : [$res2]"
+	
+	if [ "$res1" = "$res2" ]; then
+	    echo -e "${vert}aff_alpha : OK${neutre}"
+	else
+	    echo -e "${rouge}aff_alpha : KO${neutre}"
+	fi
+	;;
+
+esac

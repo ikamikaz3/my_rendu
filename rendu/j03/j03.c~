@@ -1,0 +1,17 @@
+/*
+** j03.c for j03 in /home/billot_t/rendu/j03
+** 
+** Made by thomas billot
+** Login   <billot_t@epitech.net>
+** 
+** Started on  Wed Oct  1 08:42:38 2014 thomas billot
+** Last update Wed Oct  1 08:45:53 2014 thomas billot
+*/
+
+int	main()
+{
+  int	i;
+
+  i = 42;
+  i = i + 1;
+}

@@ -1,0 +1,48 @@
+/*
+** parsing.c for printf in /home/billot_t/rendu/PSU_2019_my_printf
+** 
+** Made by Thomas Billot
+** Login   <billot_t@epitech.net>
+** 
+** Started on  Thu Nov 13 11:21:04 2014 Thomas Billot
+** Last update Thu Nov 13 13:33:49 2014 Thomas Billot
+*/
+
+#include "../../include/printf.h"
+
+int		parsing(int i, const char *format, va_list ap)
+{
+  t_list	char_list[] = {{'d', &char_d},
+			       {'i', &char_d},
+			       {'c', &char_c},
+			       {'s', &char_s},
+			       {'x', &char_x},
+			       {'X', &char_X},
+			       {'b', &char_b},
+			       {'o', &char_o},
+			       {'p', &char_p},
+			       {'u', &char_u},
+			       {'\0', NULL}};
+  int		counter_1;
+  int		counter_2;
+  int		return_value;
+  
+  counter_1 = 0;
+  counter_2 = 0;
+  while (*format != char_list[counter_1].specifier)
+    { 
+      counter_1 = counter_1 + 1;
+      if (counter_1 == 11)
+	{
+	  counter_1 = 0;
+	  format = format + 1;
+	}
+    }
+  while (char_list[counter_2].f != NULL)
+    {
+      if (char_list[counter_2].specifier == *format)
+	return_value = char_list[counter_2].f(ap);
+      counter_2 = counter_2 + 1;
+    }
+  return (i + return_value);
+}

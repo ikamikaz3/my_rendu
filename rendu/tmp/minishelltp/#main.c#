@@ -1,0 +1,21 @@
+/*
+** main.c for tp_minishell in /home/billot_t/rendu/tmp/minishelltp
+** 
+** Made by Thomas Billot
+** Login   <billot_t@epitech.net>
+** 
+** Started on  Tue Jan 27 12:00:23 2015 Thomas Billot
+** Last update Tue Jan 27 13:47:32 2015 Thomas Billot
+*/
+
+#include <sys/types.h>
+#include <unistd.h>
+#include <stdio.h>
+
+int		main(void)
+{
+  printf("launching ls\n");
+  execlp("ls", "ls", 0);
+  printf("ls ended\n");
+  return (0);
+}

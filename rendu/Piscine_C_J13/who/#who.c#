@@ -1,0 +1,16 @@
+/*
+** who.c for who in /home/billot_t/rendu/Piscine_C_J13/who
+** 
+** Made by thomas billot
+** Login   <billot_t@epitech.net>
+** 
+** Started on  Thu Oct 23 17:49:18 2014 thomas billot
+** Last update Thu Oct 23 17:49:18 2014 thomas billot
+*/
+
+#include <utmp.h>
+
+int	main()
+{
+  
+}
